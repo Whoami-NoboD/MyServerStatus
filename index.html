@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Estado del Servidor de Minecraft</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    .status {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+    .online {
+      color: green;
+    }
+    .offline {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Estado del servidor de Minecraft</h1>
+  <div class="status" id="status">Verificando...</div>
+
+  <script>
+    fetch("https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905", {
+      method: "GET",
+      headers: {
+        "User-Agent": "estado-servidor-mc"
+      }
+    })
+    .then(response => {
+      const statusElement = document.getElementById("status");
+      if (response.status === 200) {
+        statusElement.textContent = "🟢 Servidor ONLINE";
+        statusElement.classList.add("online");
+      } else {
+        statusElement.textContent = "🔴 Servidor OFFLINE";
+        statusElement.classList.add("offline");
+      }
+    })
+    .catch(error => {
+      document.getElementById("status").textContent = "Error al verificar el estado";
+    });
+  </script>
+</body>
+</html>
