@@ -9,6 +9,9 @@
       text-align: center;
       padding: 40px;
     }
+    h1 {
+      color: white; /* Cambié esto para hacer el texto blanco */
+    }
     .status {
       font-size: 2em;
       margin-top: 20px;
@@ -26,8 +29,7 @@
   <div class="status" id="status">Verificando...</div>
 
   <script>
-    // Usamos un proxy CORS para evitar bloqueos
-    fetch("https://cors-anywhere.herokuapp.com/https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905", {
+    fetch("https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905", {
       method: "GET",
       headers: {
         "User-Agent": "estado-servidor-mc"
