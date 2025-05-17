@@ -26,7 +26,8 @@
   <div class="status" id="status">Verificando...</div>
 
   <script>
-    fetch("https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905", {
+    // Usamos un proxy CORS para evitar bloqueos
+    fetch("https://cors-anywhere.herokuapp.com/https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905", {
       method: "GET",
       headers: {
         "User-Agent": "estado-servidor-mc"
