@@ -28,7 +28,8 @@
   <h1>Estado del servidor de Minecraft</h1>
   <div class="status" id="status">Verificando...</div>
 
-  <script>
+ <script>
+    fetch("https://cors-anywhere.herokuapp.com/https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905", {
     fetch("https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905", {
       method: "GET",
       headers: {
