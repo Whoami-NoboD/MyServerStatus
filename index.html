@@ -8,6 +8,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 40px;
+      color: white;
     }
     h1 {
       color: white;
@@ -17,10 +18,10 @@
       margin-top: 20px;
     }
     .online {
-      color: green;
+      color: #4CAF50;
     }
     .offline {
-      color: red;
+      color: #F44336;
     }
   </style>
 </head>
@@ -30,42 +31,23 @@
 
   <script>
     const statusElement = document.getElementById("status");
-    const directURL = "https://api.mcsrvstat.us/simple/Yanity.aternos.me:50905";
-    const proxyURL = "https://cors-anywhere.herokuapp.com/" + directURL;
+    const serverURL = "https://api.mcsrvstat.us/2/Yanity.aternos.me:50905";
 
-    function checkServerStatus(url) {
-      return fetch(url, {
-        method: "GET",
-        headers: {
-          "User-Agent": "estado-servidor-mc"
-        }
-      });
-    }
-
-    checkServerStatus(directURL)
-      .then(response => {
-        if (response.ok) {
+    fetch(serverURL)
+      .then(response => response.json())
+      .then(data => {
+        if (data.online) {
           statusElement.textContent = "🟢 Servidor ONLINE";
           statusElement.classList.add("online");
         } else {
-          throw new Error("Fallo sin proxy");
+          statusElement.textContent = "🔴 Servidor OFFLINE";
+          statusElement.classList.add("offline");
         }
       })
-      .catch(() => {
-        checkServerStatus(proxyURL)
-          .then(response => {
-            if (response.ok) {
-              statusElement.textContent = "🟢 Servidor ONLINE (via proxy)";
-              statusElement.classList.add("online");
-            } else {
-              statusElement.textContent = "🔴 Servidor OFFLINE";
-              statusElement.classList.add("offline");
-            }
-          })
-          .catch(() => {
-            statusElement.textContent = "❌ Error al verificar el estado del servidor";
-            statusElement.classList.add("offline");
-          });
+      .catch(error => {
+        console.error("Error al verificar el servidor:", error);
+        statusElement.textContent = "❌ Error al verificar el estado del servidor";
+        statusElement.classList.add("offline");
       });
   </script>
 </body>
